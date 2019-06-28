@@ -31,12 +31,12 @@ function GetSaijitsuData(){
 	Invoke-WebRequest -Uri $TergetURI -OutFile $TempFile
 
 	# ヘッダー書き直し
-	$text = Get-Content  -Path $TempFile -Encoding Default
+	$text = Get-Content  -Path $TempFile -Encoding Oem
 	$text[0] = "Date, Name"
-	$text | Set-Content -Path $TempFile -Encoding Default
+	$text | Set-Content -Path $TempFile -Encoding Oem
 
 	# CSV 読む
-	$Lines = Import-Csv -Path $TempFile -Encoding Default
+	$Lines = Import-Csv -Path $TempFile -Encoding Oem
 
 	# Temp File 削除
 	Remove-Item $TempFile
@@ -180,7 +180,7 @@ while($StartDay.AddDays($i).Year -eq [int]$Year){
 
 # CSV 出力
 try{
-	$Weeks | Export-CSV $Path -Encoding Default
+	$Weeks | Export-CSV $Path -Encoding Oem
 }
 catch{
 	echo "$Path を出力できませんでした"
